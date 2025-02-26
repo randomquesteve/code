@@ -1,0 +1,63 @@
+%nonfg = Extracted_data(:, [1:56, 64:end]);
+%fg = Extracted_data(:, 57:63);
+%nonfg = nonfg(:);
+%nonfg = nonfg(~isnan(nonfg));  
+%fg= fg(:);
+%fg= fg(~isnan(fg));
+nonFG = nonfg; 
+FG = fg; 
+
+num_samples = 1000;
+median_pre_samples = zeros(num_samples, 1);
+
+for i = 1:num_samples
+   
+    sampled_data = datasample(nonFG, numel(FG), 'Replace', false);
+    
+    median_pre_samples(i) = median(sampled_data);
+end
+
+median_post = median(FG);
+
+figure;
+hold on;
+
+binWidth = 0.025;
+edges = min(combined_rest):binWidth:max(combined_rest);
+
+nonFG_counts = histcounts(nonFG, edges);
+FG_counts = histcounts(FG, edges);
+
+nonFG_counts = nonFG_counts / sum(nonFG_counts) * 100;
+FG_counts = FG_counts / sum(FG_counts) * 100;
+
+bar(edges(1:end-1) + diff(edges)/2, nonFG_counts, 'FaceColor', [0.7 0.7 0.7], 'EdgeColor', 'none', 'BarWidth', 1);
+
+bar(edges(1:end-1) + diff(edges)/2, -FG_counts, 'FaceColor', [0.4 0.4 0.4], 'EdgeColor', 'none', 'BarWidth', 1);
+
+line([median(median_pre_samples), median(median_pre_samples)], [0 max(nonFG_counts)], 'Color', 'b', 'LineStyle', '--', 'LineWidth', 2);
+
+line([median_post, median_post], [0 -max(FG_counts)], 'Color', [1, 0.07, 0.65], 'LineStyle', '--', 'LineWidth', 2);
+
+xlim([-0.02 1]);
+ylim([-40 40]);
+xlabel('Connection Probability');
+ylabel('Percentage(%)');
+set(gca, 'YTick', -40:20:40, 'YTickLabel', abs(-40:20:40)); 
+box off;
+
+text(0.6, 30, 'nonFG', 'FontSize', 25, 'Color', [0.5 0.5 0.5]);
+text(0.6, -30, '   FG', 'FontSize', 25, 'Color', [0.5 0.5 0.5]);
+% Fig6c
+% text(0.3, 30, 'non Responsive Regions', 'FontSize', 25, 'Color', [0.5 0.5 0.5]);
+% text(0.3, -30, '   Responsive Regions', 'FontSize', 25, 'Color', [0.5 0.5 0.5]);
+
+set(gca, 'FontWeight','bold','FontSize', 25,'LineWidth', 2, 'Box', 'off');
+set(groot, 'DefaultAxesLabelFontSizeMultiplier', 1);
+
+hold off;
+
+% Kolmogorov-Smirnov test
+[h, p,ks2stat] = kstest2(nonFG, FG);
+disp(['KS test p-value: ', num2str(p)]);
+disp(['D: ', num2str(ks2stat)]);
