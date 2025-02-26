@@ -1,0 +1,29 @@
+% group = data(:, 1);
+% info = data(:, 2);
+
+internal = info(group == 2);
+external = info(group == 1);
+[p, h, stats] = ranksum(internal, external);
+
+figure;
+h1 = boxplot(internal, 'Positions', 1, 'Widths', 0.5, 'Colors', [253/255, 180/255, 98/255]);
+hold on;
+h2 = boxplot(external, 'Positions', 2, 'Widths', 0.5, 'Colors', [32/255, 163/255, 158/255]);
+
+set(findobj(h1, 'type', 'line'), 'LineWidth', 1.5);
+set(findobj(h2, 'type', 'line'), 'LineWidth', 1.5);
+
+patch(get(h1(5), 'XData'), get(h1(5), 'YData'), [253/255, 180/255, 98/255], 'FaceAlpha', 0.5, 'EdgeColor', 'none');
+patch(get(h2(5), 'XData'), get(h2(5), 'YData'), [32/255, 163/255, 158/255], 'FaceAlpha', 0.5, 'EdgeColor', 'none');
+
+scatter(ones(size(internal)), internal, 60, 'filled', 'MarkerFaceColor', [253/255, 180/255, 98/255], 'jitter', 'on', 'jitterAmount', 0.2, 'MarkerFaceAlpha', 0.8, 'MarkerEdgeColor', 'k');
+scatter(2 * ones(size(external)), external, 60, 'filled', 'MarkerFaceColor', [32/255, 163/255, 158/255], 'jitter', 'on', 'jitterAmount', 0.2, 'MarkerFaceAlpha', 0.8, 'MarkerEdgeColor', 'k');
+
+set(gca, 'XTick', [1, 2]);
+set(gca, 'XTickLabel', {'Internally oriented', 'Externally oriented'});
+ylabel('Connectivity Selectivity Index');
+
+text(1.5, max(info), sprintf('p = %.4f', p), 'HorizontalAlignment', 'center', 'VerticalAlignment', 'top', 'FontSize', 25, 'Color', 'k');
+
+set(gca, 'LineWidth', 2, 'FontWeight', 'bold', 'FontSize', 25);
+box off;
