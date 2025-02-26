@@ -1,0 +1,35 @@
+[p_value, h, stats] = ranksum(nonRR, RR);
+
+ disp(['p-value: ', num2str(p_value)]);
+
+if p_value < 0.05
+    disp('There is a significant difference between the two groups.');
+else
+    disp('There is no significant difference between the two groups.');
+end
+
+figure
+
+hold on;
+h1 = boxplot(nonRR', 'Positions', 1, 'Widths', 0.4, 'Whisker', 1.5, 'Colors', [0.1, 0.4, 0.9]);
+
+h2 = boxplot(RR', 'Positions', 2, 'Widths', 0.4, 'Whisker', 1.5, 'Colors', [1, 0.07, 0.65]);
+
+outliers1 = findobj(h1, 'Tag', 'Outliers');
+set(outliers1, 'MarkerEdgeColor', [0.5, 0.5, 0.5], 'MarkerFaceColor', [0.5, 0.5, 0.5]);
+outliers2 = findobj(h2, 'Tag', 'Outliers');
+set(outliers2, 'MarkerEdgeColor', [0.5, 0.5, 0.5], 'MarkerFaceColor', [0.5, 0.5, 0.5]);
+set(findobj(h1, 'type', 'line'), 'LineWidth', 1.5);
+set(findobj(h2, 'type', 'line'), 'LineWidth', 1.5);
+patch(get(h1(5), 'XData'), get(h1(5), 'YData'),[0.1, 0.4, 0.9], 'FaceAlpha', 0.5,'EdgeColor', 'none');
+patch(get(h2(5), 'XData'), get(h2(5), 'YData'), [1, 0.07, 0.65], 'FaceAlpha', 0.5,'EdgeColor', 'none');
+
+set(gca,'XTick',[1,2],'XLim',[0.5,2.5]);
+set(gca,'XTickLabel',{'nonRR','RR'});
+
+ylabel('Connection Probability');
+
+set(gca, 'FontWeight','bold', 'FontSize', 24,'LineWidth', 2, 'Box', 'off');
+set(groot, 'DefaultAxesLabelFontSizeMultiplier', 1);
+
+hold off;
