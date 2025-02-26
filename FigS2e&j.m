@@ -1,4 +1,4 @@
-data = Fig5e; 
+data = FigS2e; 
 group_info = data(:, 1);
 y = data(:, 3);%2:4 xyz
 coords = data(:, 2:4);
@@ -93,6 +93,6 @@ for i = 1:num_groups
 end
 
 xlabel('Euclidean Distance', 'FontSize', 25, 'FontWeight', 'bold');
-ylabel('Selectivity Index', 'FontSize', 25, 'FontWeight', 'bold');
+ylabel('Oriented Selectivity Index', 'FontSize', 25, 'FontWeight', 'bold');
 set(gca, 'FontSize', 25, 'FontWeight', 'bold');
 hold off;
