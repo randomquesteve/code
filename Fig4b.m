@@ -1,4 +1,4 @@
-data = csvread('xy.csv');
+data = csvread('data.csv');
 x = data(:, 1);
 y = data(:, 2);
 bandwidth = 4; 
