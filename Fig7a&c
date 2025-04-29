@@ -1,11 +1,5 @@
-%nonfg = Extracted_data(:, [1:56, 64:end]);
-%fg = Extracted_data(:, 57:63);
-%nonfg = nonfg(:);
-%nonfg = nonfg(~isnan(nonfg));  
-%fg= fg(:);
-%fg= fg(~isnan(fg));
-nonFG = nonfg; 
-FG = fg; 
+%The data are in different sheets of the corresponding Fig.7a&c.xlsx, FG/RR in sheet FG_RR, nonFG in sheet nonFG, nonRR in sheet nonRR
+
 
 num_samples = 1000;
 median_pre_samples = zeros(num_samples, 1);
