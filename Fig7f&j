@@ -1,5 +1,6 @@
+% data = data = csvread('connection.csv');
 % group = data(:, 1);
-% info = data(:, 2);
+% info = data(:, 9);
 
 internal = info(group == 2);
 external = info(group == 1);
@@ -20,7 +21,7 @@ scatter(ones(size(internal)), internal, 60, 'filled', 'MarkerFaceColor', [253/25
 scatter(2 * ones(size(external)), external, 60, 'filled', 'MarkerFaceColor', [32/255, 163/255, 158/255], 'jitter', 'on', 'jitterAmount', 0.2, 'MarkerFaceAlpha', 0.8, 'MarkerEdgeColor', 'k');
 
 set(gca, 'XTick', [1, 2]);
-set(gca, 'XTickLabel', {'Internally oriented', 'Externally oriented'});
+set(gca, 'XTickLabel', {'IOR', 'EOH'});
 ylabel('Connectivity Selectivity Index');
 
 text(1.5, max(info), sprintf('p = %.4f', p), 'HorizontalAlignment', 'center', 'VerticalAlignment', 'top', 'FontSize', 25, 'Color', 'k');
