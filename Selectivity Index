@@ -1,4 +1,4 @@
-data = fig4c;
+data = data;
 group_info = data(:, 1);
 y = data(:, 2);
 
@@ -33,7 +33,7 @@ for i = 1:num_groups
 end
 y= expression_value
 x = 1:length(y);
-% 画折线图
+
 figure;
 plot(x, y, '-o', 'Color','b' ,'MarkerFaceColor','b','LineWidth', 4, 'MarkerSize', 6);
 ylabel('Selectivity Index',  'FontWeight', 'bold');
@@ -42,5 +42,5 @@ line([0.5, 6.5], [0, 0], 'Color', [0.5, 0.5, 0.5], 'LineStyle', '--', 'LineWidth
 hold off;
 box off
 set(gca,'XLim',[0.5 6.5],'FontSize',25,'FontWeight', 'bold');
-xticks([2, 5]); % 设置 x 轴刻度位置
+xticks([2, 5]); 
 xticklabels({'Anterior','Posterior'});
