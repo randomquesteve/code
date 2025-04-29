@@ -1,6 +1,6 @@
 data = csvread('data.csv');
-pos_labels = data(:, 2); %1=medial-lateral；2=anterior-posterior
-mem_labels = data(:, 4); 
+pos_labels = data(:, 3); %2=medial-lateral；3=anterior-posterior
+mem_labels = data(:, 5); 
 
 model = fitglm(pos_labels, mem_labels, 'Distribution', 'binomial');
 
