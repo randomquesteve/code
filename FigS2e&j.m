@@ -1,8 +1,8 @@
 data = csvread('data.csv');
 group_info = data(:, 1);
-y = data(:, 3);%2:4 xyz
+y = data(:, 3);% 2:4 xyz
 coords = data(:, 2:4);
-category = data(:, 11); % 11=content, 10=quality
+category = data(:, 6); % 7=content, 6=quality
 
 valid_indices = ~isnan(y);
 group_info = group_info(valid_indices);
