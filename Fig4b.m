@@ -1,6 +1,6 @@
 data = csvread('data.csv');
-x = data(:, 1);
-y = data(:, 2);
+x = data(:, 2);
+y = data(:, 3);
 bandwidth = 4; 
 [X, Y] = meshgrid(min(x):0.1:max(x), min(y):0.1:max(y));
 Z = zeros(size(X));
