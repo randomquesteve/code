@@ -1,9 +1,6 @@
-%nonfg = Extracted_data(:, [1:56, 64:end]);
-%fg = Extracted_data(:, 57:63);
-%nonFG = nanmedian(nonfg, 2);  
-%FG = nanmedian(fg, 2);    
+%Data in corresponding Fig.7b.xlsx  
 
-[p, h, stats] = signrank(FG, FG);
+[p, h, stats] = signrank(FG, nonFG);
 
 figure;
 hold on;
