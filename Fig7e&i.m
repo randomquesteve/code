@@ -1,4 +1,4 @@
-data_matrix = csvread('Fig7e.csv');
+data_matrix = csvread('connection.csv');
 p_values = zeros(1, 7);
 
 figure;
@@ -35,5 +35,5 @@ xticklabels({ 'Anterior','Posterior'});
 set(gca, 'YLim', [-0.05 0.8], 'YTick', 0:0.2:0.8, 'YTickLabel', 0:0.2:0.8);
 set(gca, 'LineWidth', 2, 'FontWeight', 'bold', 'FontSize', 25);
 box off
-legend('Internally oriented reminiscences', 'Externally oriented hallucinations', 'FontWeight', 'bold', 'edgecolor', 'none');
+legend('Internally-oriented reminiscences', 'Externally-oriented hallucinations', 'FontWeight', 'bold', 'edgecolor', 'none');
 hold off;
