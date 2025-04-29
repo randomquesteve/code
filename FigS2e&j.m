@@ -1,8 +1,8 @@
-data = FigS2e; 
+data = csvread('data.csv');
 group_info = data(:, 1);
-y = data(:, 3);%2:4 xyz
+y = data(:, 3);%2:3 xy
 coords = data(:, 2:4);
-category = data(:, 5); % 5=content, 6=type
+category = data(:, 10); % 10=content, 9=quality
 
 valid_indices = ~isnan(y);
 group_info = group_info(valid_indices);
@@ -34,8 +34,8 @@ end
 expression_value = zeros(1, num_groups);
 group_within_distances = cell(1, num_groups);
 group_between_distances = cell(1, num_groups);
-A = sum(group_info == 0);
-B = sum(group_info == 1);
+A = sum(group_info == 1);
+B = sum(group_info == 2);
 for i = 1:num_groups
     current_group = grouped_group_info{i};
     current_coords = grouped_coords{i};
@@ -44,8 +44,8 @@ for i = 1:num_groups
     current_coords = current_coords(valid_indices, :);
     current_category = current_category(valid_indices);
 
-    num_1 = sum(current_group == 0);
-    num_2 = sum(current_group == 1);
+    num_1 = sum(current_group == 1);
+    num_2 = sum(current_group == 2);
     
     a = num_2;
     b = num_1;
@@ -92,6 +92,10 @@ for i = 1:num_groups
         'Color', within_color);
 end
 
+xlabel('Euclidean Distance', 'FontSize', 25, 'FontWeight', 'bold');
+ylabel('Selectivity Index', 'FontSize', 25, 'FontWeight', 'bold');
+set(gca, 'FontSize', 25, 'FontWeight', 'bold');
+hold off;
 xlabel('Euclidean Distance', 'FontSize', 25, 'FontWeight', 'bold');
 ylabel('Oriented Selectivity Index', 'FontSize', 25, 'FontWeight', 'bold');
 set(gca, 'FontSize', 25, 'FontWeight', 'bold');
