@@ -1,4 +1,4 @@
-data_matrix = csvread('data.csv');
+data_matrix = csvread('Fig7e.csv');
 p_values = zeros(1, 7);
 
 figure;
