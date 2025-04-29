@@ -1,6 +1,6 @@
-data = data;
+data = csvread('data.csv');
 group_info = data(:, 1);
-y = data(:, 2);
+y = data(:, 3);
 
 valid_indices = ~isnan(y);
 group_info = group_info(valid_indices);
